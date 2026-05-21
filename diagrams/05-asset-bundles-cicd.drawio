@@ -1,0 +1,181 @@
+<mxfile host="app.diagrams.net" modified="2026-05-21T10:00:00.000Z" agent="Claude" version="22.1.0">
+  <diagram name="Asset Bundles CI/CD" id="bundles-cicd">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="&lt;b&gt;DATABRICKS ASSET BUNDLES — CI/CD FLOW&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontColor=#1a1a1a;" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="700" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Local develop → PR review → OAuth M2M deploy → dev / stg / prod targets · Terraform under the hood" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#616161;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="200" y="50" width="1000" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Stage 1: Developer -->
+        <mxCell id="dev-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="260" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-label" value="&lt;b&gt;1. DEVELOPER&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontColor=#1565C0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="60" y="115" width="220" height="25" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dev-laptop" value="&lt;b&gt;Local Machine&lt;/b&gt;&lt;br&gt;&lt;br&gt;databricks CLI&lt;br&gt;VS Code extension&lt;br&gt;PIV-auth login" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="60" y="150" width="220" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dev-bundle" value="&lt;b&gt;databricks.yml&lt;/b&gt;&lt;br&gt;&lt;br&gt;bundle: { name }&lt;br&gt;include: resources/*.yml&lt;br&gt;variables: { ... }&lt;br&gt;targets:&lt;br&gt;&amp;nbsp;&amp;nbsp;dev / stg / prod" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1565C0;strokeWidth=1;fontSize=9;align=left;fontFamily=Courier New;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="250" width="220" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dev-validate" value="&lt;b&gt;databricks bundle validate&lt;/b&gt;&lt;br&gt;&lt;br&gt;Schema check&lt;br&gt;Variable resolution&lt;br&gt;Target dry-run" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#90CAF9;strokeColor=#1565C0;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="60" y="380" width="220" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ar-1-2" style="endArrow=classic;html=1;strokeColor=#424242;strokeWidth=4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="305" y="290" as="sourcePoint" />
+            <mxPoint x="345" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Stage 2: GitHub -->
+        <mxCell id="gh-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#6A1B9A;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="350" y="100" width="260" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="gh-label" value="&lt;b&gt;2. GITHUB&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontColor=#6A1B9A;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="370" y="115" width="220" height="25" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gh-pr" value="&lt;b&gt;Pull Request&lt;/b&gt;&lt;br&gt;&lt;br&gt;Review · CODEOWNERS&lt;br&gt;Required approvers&lt;br&gt;Branch protection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#6A1B9A;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="370" y="150" width="220" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gh-checks" value="&lt;b&gt;PR Checks (CI)&lt;/b&gt;&lt;br&gt;&lt;br&gt;• yamllint / pre-commit&lt;br&gt;• bundle validate&lt;br&gt;• Unit tests (pytest)&lt;br&gt;• Security scan (CodeQL)&lt;br&gt;• Dry-run plan to dev" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#6A1B9A;strokeWidth=2;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="370" y="250" width="220" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gh-merge" value="&lt;b&gt;Merge to main&lt;/b&gt;&lt;br&gt;&lt;br&gt;Triggers deploy.yml&lt;br&gt;OIDC token issued" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BA68C8;strokeColor=#4A148C;strokeWidth=2;fontSize=10;align=center;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="370" y="380" width="220" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ar-2-3" style="endArrow=classic;html=1;strokeColor=#424242;strokeWidth=4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="615" y="290" as="sourcePoint" />
+            <mxPoint x="655" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Stage 3: Runner -->
+        <mxCell id="run-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="660" y="100" width="280" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="run-label" value="&lt;b&gt;3. CI RUNNER (OAuth M2M)&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontColor=#E65100;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="680" y="115" width="240" height="25" as="geometry" />
+        </mxCell>
+
+        <mxCell id="run-oidc" value="&lt;b&gt;OIDC Federation&lt;/b&gt;&lt;br&gt;&lt;br&gt;GitHub → Databricks SP&lt;br&gt;Trust on repo + branch&lt;br&gt;No long-lived secrets" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="680" y="150" width="240" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="run-deploy" value="&lt;b&gt;databricks bundle deploy&lt;/b&gt;&lt;br&gt;--target $TARGET&lt;br&gt;&lt;br&gt;Renders to Terraform&lt;br&gt;Plan → Apply&lt;br&gt;Run-as: bundle SP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCC80;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="680" y="250" width="240" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="run-tf" value="&lt;b&gt;Terraform (under the hood)&lt;/b&gt;&lt;br&gt;&lt;br&gt;State in S3 + DynamoDB lock&lt;br&gt;Per-target backend&lt;br&gt;Drift detection" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;strokeColor=#BF360C;strokeWidth=2;fontSize=10;align=center;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="680" y="380" width="240" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ar-3-4" style="endArrow=classic;html=1;strokeColor=#424242;strokeWidth=4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="945" y="290" as="sourcePoint" />
+            <mxPoint x="985" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Stage 4: Targets -->
+        <mxCell id="tgt-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="990" y="100" width="370" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="tgt-label" value="&lt;b&gt;4. DEPLOY TARGETS&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontColor=#2E7D32;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1010" y="115" width="330" height="25" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tgt-dev" value="&lt;b&gt;DEV WORKSPACE&lt;/b&gt;&lt;br&gt;&lt;br&gt;Auto-deploy on PR&lt;br&gt;Sandbox catalogs&lt;br&gt;Loose policies" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="150" width="330" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tgt-stg" value="&lt;b&gt;STAGING WORKSPACE&lt;/b&gt;&lt;br&gt;&lt;br&gt;Auto-deploy on merge to main&lt;br&gt;Production-shaped data&lt;br&gt;Integration tests" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#81C784;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="250" width="330" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tgt-prod" value="&lt;b&gt;PROD WORKSPACE&lt;/b&gt;&lt;br&gt;&lt;br&gt;Manual approval gate&lt;br&gt;FedRAMP-bound catalogs&lt;br&gt;Full audit + alerting" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#66BB6A;strokeColor=#1B5E20;strokeWidth=2;fontSize=10;align=center;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="350" width="330" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Resources deployed -->
+        <mxCell id="res-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#AD1457;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="40" y="510" width="1320" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="res-label" value="&lt;b&gt;RESOURCES DEPLOYED BY BUNDLE&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#AD1457;" vertex="1" parent="1">
+          <mxGeometry x="60" y="520" width="600" height="25" as="geometry" />
+        </mxCell>
+
+        <mxCell id="res-jobs" value="&lt;b&gt;Jobs&lt;/b&gt;&lt;br&gt;&lt;br&gt;ETL · scheduled&lt;br&gt;run_as: SP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8BBD0;strokeColor=#AD1457;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="60" y="555" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="res-pipelines" value="&lt;b&gt;Lakeflow Pipelines&lt;/b&gt;&lt;br&gt;&lt;br&gt;Auto Loader&lt;br&gt;Declarative DLT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8BBD0;strokeColor=#AD1457;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="260" y="555" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="res-clusters" value="&lt;b&gt;Cluster Policies&lt;/b&gt;&lt;br&gt;&lt;br&gt;Photon-only&lt;br&gt;Cost-tagged" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8BBD0;strokeColor=#AD1457;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="460" y="555" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="res-grants" value="&lt;b&gt;UC Grants&lt;/b&gt;&lt;br&gt;&lt;br&gt;catalog/schema/table&lt;br&gt;Idempotent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8BBD0;strokeColor=#AD1457;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="660" y="555" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="res-warehouse" value="&lt;b&gt;SQL Warehouses&lt;/b&gt;&lt;br&gt;&lt;br&gt;Serverless&lt;br&gt;Auto-stop" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8BBD0;strokeColor=#AD1457;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="860" y="555" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="res-apps" value="&lt;b&gt;Databricks Apps&lt;/b&gt;&lt;br&gt;&lt;br&gt;App backend SP&lt;br&gt;OBO config" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8BBD0;strokeColor=#AD1457;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="555" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="res-dashboards" value="&lt;b&gt;Dashboards&lt;/b&gt;&lt;br&gt;&lt;br&gt;Lakeview&lt;br&gt;Versioned" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8BBD0;strokeColor=#AD1457;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="555" width="100" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="res-note" value="&lt;b&gt;Note:&lt;/b&gt; Bundles excel at job/pipeline/grant churn. For account-level objects (workspaces, metastores, networks) use raw Terraform. CLI/REST is for one-off remediation." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#AD1457;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="60" y="670" width="1300" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Failure modes -->
+        <mxCell id="fail-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="40" y="730" width="1320" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="fail-label" value="&lt;b&gt;DEBUGGING CHECKLIST: bundle works in dev, fails in prod&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#C62828;" vertex="1" parent="1">
+          <mxGeometry x="60" y="740" width="800" height="25" as="geometry" />
+        </mxCell>
+
+        <mxCell id="fail-1" value="&lt;b&gt;1. run_as identity&lt;/b&gt;&lt;br&gt;Different SP per target?&lt;br&gt;Has prod SP been granted USE on the catalog?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=2;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="775" width="310" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fail-2" value="&lt;b&gt;2. Variable resolution&lt;/b&gt;&lt;br&gt;Are catalog/schema vars overridden in prod?&lt;br&gt;Check ${var.x} substitution in plan output." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=2;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="385" y="775" width="310" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fail-3" value="&lt;b&gt;3. Workspace permissions&lt;/b&gt;&lt;br&gt;Is the deploy SP a workspace user?&lt;br&gt;Has it CAN_MANAGE on existing resources?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=2;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="710" y="775" width="310" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fail-4" value="&lt;b&gt;4. Cluster policy mismatch&lt;/b&gt;&lt;br&gt;Prod policy may forbid node types/instance pools dev allows.&lt;br&gt;Check policy_id resolution per target." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=2;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1035" y="775" width="310" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Branding -->
+        <mxCell id="branding-text" value="Mountain Digital Systems" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#1976D2;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1100" y="20" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="branding-logo" value="MDS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1976D2;strokeColor=#0D47A1;strokeWidth=2;fontSize=12;fontColor=#FFFFFF;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1325" y="20" width="40" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

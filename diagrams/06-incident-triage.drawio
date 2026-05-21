@@ -1,0 +1,166 @@
+<mxfile host="app.diagrams.net" modified="2026-05-21T10:00:00.000Z" agent="Claude" version="22.1.0">
+  <diagram name="Incident Triage Flow" id="incident-triage">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="&lt;b&gt;9 PM FRIDAY: INGESTION LAG INCIDENT TRIAGE&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontColor=#1a1a1a;" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="700" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Layered hypothesis tree — eliminate the cheap suspects before paging humans" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#616161;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="200" y="50" width="1000" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Alert -->
+        <mxCell id="alert" value="&lt;b&gt;ALERT&lt;/b&gt;&lt;br&gt;&lt;br&gt;Ingestion lag: minutes → 6 hours&lt;br&gt;Spark UI: executors look healthy&lt;br&gt;UC queries from BI tools timing out&lt;br&gt;Account console: nothing red" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=3;fontSize=11;align=center;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="540" y="100" width="320" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow down -->
+        <mxCell id="ar-alert" style="endArrow=classic;html=1;strokeColor=#C62828;strokeWidth=4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="205" as="sourcePoint" />
+            <mxPoint x="700" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Step 1: Source -->
+        <mxCell id="s1" value="&lt;b&gt;STEP 1: SOURCE&lt;/b&gt;&lt;br&gt;&lt;br&gt;Are agency buckets emitting?&lt;br&gt;CloudTrail · S3 inventory · object counts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=3;fontSize=11;align=center;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="540" y="240" width="320" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="s1-no" value="&lt;b&gt;NO emissions&lt;/b&gt;&lt;br&gt;&lt;br&gt;Escalate to agency&lt;br&gt;NOT a CISA problem" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCCBC;strokeColor=#BF360C;strokeWidth=2;fontSize=10;align=center;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="245" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ar-s1-no" style="endArrow=classic;html=1;strokeColor=#BF360C;strokeWidth=2;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="540" y="285" as="sourcePoint" />
+            <mxPoint x="305" y="285" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ar-s1-yes" style="endArrow=classic;html=1;strokeColor=#E65100;strokeWidth=4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="335" as="sourcePoint" />
+            <mxPoint x="700" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s1-yes-label" value="YES → continue" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#E65100;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="710" y="340" width="120" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Step 2: Auto Loader -->
+        <mxCell id="s2" value="&lt;b&gt;STEP 2: AUTO LOADER&lt;/b&gt;&lt;br&gt;&lt;br&gt;numFilesQueued · numNewListedFiles&lt;br&gt;batchDuration · processedRowsPerSecond&lt;br&gt;Schema-evolution failures? rescued_data?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;strokeWidth=3;fontSize=11;align=center;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="540" y="370" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="s2-clue" value="&lt;b&gt;Clue:&lt;/b&gt; numFilesQueued spiking&lt;br&gt;= listing not keeping up&lt;br&gt;= file notification mode needed?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B3E5FC;strokeColor=#0277BD;strokeWidth=2;fontSize=10;align=left;spacing=8;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="375" width="280" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ar-s2-clue" style="endArrow=open;html=1;strokeColor=#0277BD;strokeWidth=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="420" as="sourcePoint" />
+            <mxPoint x="900" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ar-s2" style="endArrow=classic;html=1;strokeColor=#0277BD;strokeWidth=4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="475" as="sourcePoint" />
+            <mxPoint x="700" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Step 3: UC / metastore -->
+        <mxCell id="s3" value="&lt;b&gt;STEP 3: UC / METASTORE LATENCY&lt;/b&gt;&lt;br&gt;&lt;br&gt;system.access.audit p99 latency&lt;br&gt;Query history WAITING_ON_METASTORE&lt;br&gt;Hot grants? Catalog binding flapping?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=3;fontSize=11;align=center;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="540" y="510" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="s3-clue" value="&lt;b&gt;Why this matters:&lt;/b&gt;&lt;br&gt;UC = single point on critical path.&lt;br&gt;If metastore is slow, BI + jobs both stall." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;align=left;spacing=8;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="515" width="280" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ar-s3-clue" style="endArrow=open;html=1;strokeColor=#2E7D32;strokeWidth=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="560" as="sourcePoint" />
+            <mxPoint x="900" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ar-s3" style="endArrow=classic;html=1;strokeColor=#2E7D32;strokeWidth=4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="615" as="sourcePoint" />
+            <mxPoint x="700" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Step 4: Compute -->
+        <mxCell id="s4" value="&lt;b&gt;STEP 4: COMPUTE&lt;/b&gt;&lt;br&gt;&lt;br&gt;Cluster events: spot reclaim?&lt;br&gt;Instance pool exhaustion?&lt;br&gt;Auto-scaling stuck at min?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#6A1B9A;strokeWidth=3;fontSize=11;align=center;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="540" y="650" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="s4-clue" value="&lt;b&gt;Trap:&lt;/b&gt; Executors look healthy&lt;br&gt;but driver is GC-thrashing.&lt;br&gt;Check driver memory + thread dump." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#6A1B9A;strokeWidth=2;fontSize=10;align=left;spacing=8;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="655" width="280" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ar-s4-clue" style="endArrow=open;html=1;strokeColor=#6A1B9A;strokeWidth=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="700" as="sourcePoint" />
+            <mxPoint x="900" y="700" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ar-s4" style="endArrow=classic;html=1;strokeColor=#6A1B9A;strokeWidth=4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="755" as="sourcePoint" />
+            <mxPoint x="700" y="790" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Step 5: Network -->
+        <mxCell id="s5" value="&lt;b&gt;STEP 5: NETWORK&lt;/b&gt;&lt;br&gt;&lt;br&gt;PrivateLink endpoint health · VPCE quota&lt;br&gt;S3 503 SlowDown (request rate ceiling)&lt;br&gt;NAT GW throughput · DNS resolution" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=3;fontSize=11;align=center;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="540" y="790" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="s5-clue" value="&lt;b&gt;Common at TB/hour:&lt;/b&gt;&lt;br&gt;S3 503 throttling on partition&lt;br&gt;hot-spotting → repartition prefix." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=2;fontSize=10;align=left;spacing=8;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="795" width="280" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ar-s5-clue" style="endArrow=open;html=1;strokeColor=#C62828;strokeWidth=1;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="840" as="sourcePoint" />
+            <mxPoint x="900" y="840" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Left side: artefacts to grab -->
+        <mxCell id="art-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F57F17;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="40" y="370" width="450" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="art-label" value="&lt;b&gt;ARTEFACTS TO CAPTURE FIRST&lt;/b&gt;&lt;br&gt;(Before anything is mitigated — preserve evidence)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#F57F17;" vertex="1" parent="1">
+          <mxGeometry x="60" y="385" width="410" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="art-1" value="&lt;b&gt;1. Pipeline event log&lt;/b&gt;&lt;br&gt;event_log() table — last 4 hours" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F57F17;strokeWidth=1;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="435" width="410" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="art-2" value="&lt;b&gt;2. Spark driver thread dump&lt;/b&gt;&lt;br&gt;UI · Executor 0 · Thread Dump → snapshot" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F57F17;strokeWidth=1;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="495" width="410" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="art-3" value="&lt;b&gt;3. system.access.audit slice&lt;/b&gt;&lt;br&gt;COPY INTO last 4hr to incident catalog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F57F17;strokeWidth=1;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="555" width="410" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="art-4" value="&lt;b&gt;4. Query history snapshot&lt;/b&gt;&lt;br&gt;system.query.history WHERE state IN ('FAILED','CANCELLED')" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F57F17;strokeWidth=1;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="615" width="410" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="art-5" value="&lt;b&gt;5. Cluster events&lt;/b&gt;&lt;br&gt;clusters/events API for affected job clusters" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F57F17;strokeWidth=1;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="685" width="410" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="art-6" value="&lt;b&gt;6. AWS-side metrics&lt;/b&gt;&lt;br&gt;CloudWatch: S3 5xx, NAT bytes, VPCE PacketsDrop" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F57F17;strokeWidth=1;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="745" width="410" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="art-7" value="&lt;b&gt;7. Bundle / Terraform state&lt;/b&gt;&lt;br&gt;Has anything been deployed in last 4 hours? git log --since." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F57F17;strokeWidth=1;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="805" width="410" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Branding -->
+        <mxCell id="branding-text" value="Mountain Digital Systems" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#1976D2;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1100" y="20" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="branding-logo" value="MDS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1976D2;strokeColor=#0D47A1;strokeWidth=2;fontSize=12;fontColor=#FFFFFF;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1325" y="20" width="40" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

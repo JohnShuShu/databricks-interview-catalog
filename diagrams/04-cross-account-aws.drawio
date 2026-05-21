@@ -1,0 +1,182 @@
+<mxfile host="app.diagrams.net" modified="2026-05-21T10:00:00.000Z" agent="Claude" version="22.1.0">
+  <diagram name="Cross-Account AWS" id="cross-account">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="&lt;b&gt;CROSS-ACCOUNT AWS CONNECTIVITY&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontColor=#1a1a1a;" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="700" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="One CISA workspace account · 20+ agency-owned AWS accounts · PrivateLink + scoped storage credentials" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#616161;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="200" y="50" width="1000" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- LEFT: Agency accounts -->
+        <mxCell id="agency-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="430" height="760" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-label" value="&lt;b&gt;AGENCY-OWNED AWS ACCOUNTS&lt;/b&gt;&lt;br&gt;(20+ accounts, separate AWS Orgs)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="60" y="115" width="390" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Agency A account -->
+        <mxCell id="agency-a-acct" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="60" y="170" width="390" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-a-title" value="&lt;b&gt;Agency A AWS Account (123456789012)&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="80" y="180" width="350" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-a-bucket" value="&lt;b&gt;S3 Bucket&lt;/b&gt;&lt;br&gt;&lt;br&gt;agency-a-cisa-logs&lt;br&gt;&lt;i&gt;Bucket policy:&lt;/i&gt;&lt;br&gt;Allow CISA UC role" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="210" width="160" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-a-kms" value="&lt;b&gt;KMS Key&lt;/b&gt;&lt;br&gt;&lt;br&gt;Customer-managed&lt;br&gt;&lt;i&gt;Key policy:&lt;/i&gt;&lt;br&gt;Allow Decrypt for&lt;br&gt;CISA role ARN" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="260" y="210" width="170" height="125" as="geometry" />
+        </mxCell>
+
+        <!-- Agency B account -->
+        <mxCell id="agency-b-acct" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="60" y="370" width="390" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-b-title" value="&lt;b&gt;Agency B AWS Account (234567890123)&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="80" y="380" width="350" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-b-bucket" value="&lt;b&gt;S3 Bucket&lt;/b&gt;&lt;br&gt;&lt;br&gt;agency-b-cisa-logs&lt;br&gt;&lt;i&gt;Bucket policy:&lt;/i&gt;&lt;br&gt;Allow CISA UC role" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="410" width="160" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-b-kms" value="&lt;b&gt;KMS Key&lt;/b&gt;&lt;br&gt;&lt;br&gt;Customer-managed&lt;br&gt;&lt;i&gt;Key policy:&lt;/i&gt;&lt;br&gt;Allow Decrypt for&lt;br&gt;CISA role ARN" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="260" y="410" width="170" height="125" as="geometry" />
+        </mxCell>
+
+        <!-- Agency N -->
+        <mxCell id="agency-n-acct" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="570" width="390" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-n-title" value="&lt;b&gt;Agency N AWS Account (...20+ more)&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="80" y="580" width="350" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-n-bucket" value="&lt;b&gt;S3 Bucket&lt;/b&gt;&lt;br&gt;&lt;br&gt;agency-n-cisa-logs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="610" width="160" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-n-kms" value="&lt;b&gt;KMS Key&lt;/b&gt;&lt;br&gt;&lt;br&gt;Customer-managed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="260" y="610" width="170" height="125" as="geometry" />
+        </mxCell>
+
+        <mxCell id="agency-pattern" value="&lt;b&gt;Pattern:&lt;/b&gt; ONE storage credential (UC IAM role)&lt;br&gt;trusted by ALL agency buckets via bucket-policy.&lt;br&gt;Avoids the 'one role per bucket' explosion." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F57F17;strokeWidth=2;fontSize=10;align=left;spacing=8;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="60" y="770" width="390" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- MIDDLE: Network -->
+        <mxCell id="net-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#6A1B9A;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="490" y="100" width="320" height="760" as="geometry" />
+        </mxCell>
+        <mxCell id="net-label" value="&lt;b&gt;NETWORK PATH&lt;/b&gt;&lt;br&gt;Private connectivity, no internet" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#6A1B9A;" vertex="1" parent="1">
+          <mxGeometry x="500" y="115" width="300" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="net-tgw" value="&lt;b&gt;Transit Gateway&lt;/b&gt;&lt;br&gt;&lt;br&gt;Hub-and-spoke&lt;br&gt;Inter-VPC + inter-account&lt;br&gt;Route tables per classification" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#6A1B9A;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="510" y="180" width="280" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="net-vpce-s3" value="&lt;b&gt;VPC Endpoint: S3&lt;/b&gt;&lt;br&gt;&lt;br&gt;Gateway endpoint&lt;br&gt;com.amazonaws.us-gov-east-1.s3&lt;br&gt;Endpoint policy: scoped to&lt;br&gt;agency-* bucket ARNs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#6A1B9A;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="510" y="300" width="280" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="net-pl-front" value="&lt;b&gt;Front-end PrivateLink&lt;/b&gt;&lt;br&gt;&lt;br&gt;User → workspace UI/API&lt;br&gt;com.amazonaws.vpce.{region}.&lt;br&gt;workspace-frontend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BA68C8;strokeColor=#4A148C;strokeWidth=2;fontSize=10;align=center;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="510" y="440" width="280" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="net-pl-back" value="&lt;b&gt;Back-end PrivateLink&lt;/b&gt;&lt;br&gt;&lt;br&gt;Cluster → control plane&lt;br&gt;Secure cluster connectivity&lt;br&gt;No public IPs on data plane" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9C27B0;strokeColor=#4A148C;strokeWidth=2;fontSize=10;align=center;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="510" y="570" width="280" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="net-fw" value="&lt;b&gt;Egress Firewall&lt;/b&gt;&lt;br&gt;&lt;br&gt;Allow-list: agency S3,&lt;br&gt;Databricks control plane,&lt;br&gt;package mirrors only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7B1FA2;strokeColor=#4A148C;strokeWidth=2;fontSize=10;align=center;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="510" y="700" width="280" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Connecting arrows from agency side -->
+        <mxCell id="ar-aa-net" style="endArrow=classic;html=1;strokeColor=#6A1B9A;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.3;" edge="1" parent="1" source="agency-a-bucket" target="net-vpce-s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ar-ab-net" style="endArrow=classic;html=1;strokeColor=#6A1B9A;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="agency-b-bucket" target="net-vpce-s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ar-an-net" style="endArrow=classic;html=1;strokeColor=#6A1B9A;strokeWidth=3;exitX=1;exitY=0.5;entryX=0;entryY=0.7;" edge="1" parent="1" source="agency-n-bucket" target="net-vpce-s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- RIGHT: CISA account -->
+        <mxCell id="cisa-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="830" y="100" width="530" height="760" as="geometry" />
+        </mxCell>
+        <mxCell id="cisa-label" value="&lt;b&gt;CISA AWS ACCOUNT (FedRAMP High)&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#1565C0;" vertex="1" parent="1">
+          <mxGeometry x="850" y="115" width="490" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Storage credential -->
+        <mxCell id="cisa-cred-title" value="&lt;b&gt;UC STORAGE CREDENTIAL (IAM Role)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#90CAF9;strokeColor=#1565C0;strokeWidth=2;fontSize=11;align=center;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="850" y="160" width="490" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="cisa-cred-detail" value="arn:aws:iam::CISA-ACCT:role/uc-storage-credential&lt;br&gt;&lt;br&gt;&lt;b&gt;Trust policy:&lt;/b&gt; trusts Databricks UC service principal&lt;br&gt;&lt;b&gt;Inline policy:&lt;/b&gt; s3:GetObject, ListBucket, kms:Decrypt&lt;br&gt;&lt;b&gt;Resource:&lt;/b&gt; arn:aws:s3:::agency-*-cisa-logs/*&lt;br&gt;&lt;b&gt;sts:ExternalId:&lt;/b&gt; bound to Databricks account ID" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1565C0;strokeWidth=1;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="850" y="195" width="490" height="125" as="geometry" />
+        </mxCell>
+
+        <!-- External Locations -->
+        <mxCell id="cisa-extloc-title" value="&lt;b&gt;UC EXTERNAL LOCATIONS&lt;/b&gt;  •  one per agency bucket" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#90CAF9;strokeColor=#1565C0;strokeWidth=2;fontSize=11;align=center;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="850" y="335" width="490" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="cisa-extloc-a" value="&lt;b&gt;ext_loc_agency_a&lt;/b&gt;&lt;br&gt;s3://agency-a-cisa-logs/" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1565C0;strokeWidth=1;fontSize=9;align=center;" vertex="1" parent="1">
+          <mxGeometry x="850" y="370" width="155" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cisa-extloc-b" value="&lt;b&gt;ext_loc_agency_b&lt;/b&gt;&lt;br&gt;s3://agency-b-cisa-logs/" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1565C0;strokeWidth=1;fontSize=9;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1015" y="370" width="155" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cisa-extloc-n" value="&lt;b&gt;... ext_loc_agency_n&lt;/b&gt;&lt;br&gt;Templated via Terraform" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1565C0;strokeWidth=1;fontSize=9;align=center;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="370" width="160" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Workspace VPC -->
+        <mxCell id="cisa-ws-title" value="&lt;b&gt;WORKSPACE VPC (Customer-managed)&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#90CAF9;strokeColor=#1565C0;strokeWidth=2;fontSize=11;align=center;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="850" y="440" width="490" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="cisa-ws-detail" value="3 private subnets across AZs · NAT-less (PrivateLink only)&lt;br&gt;Security groups: deny-by-default, only PL/VPCE&lt;br&gt;Cluster instance profile: cluster-policy-pinned" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1565C0;strokeWidth=1;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="850" y="475" width="490" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Cluster + UC -->
+        <mxCell id="cisa-cluster" value="&lt;b&gt;Databricks Cluster&lt;/b&gt;&lt;br&gt;&lt;br&gt;Photon · Auto Loader&lt;br&gt;Reads via UC Storage Credential" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#42A5F5;strokeColor=#0D47A1;strokeWidth=2;fontSize=10;align=center;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="850" y="570" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="cisa-uc" value="&lt;b&gt;Unity Catalog&lt;/b&gt;&lt;br&gt;&lt;br&gt;Lineage records ext locs&lt;br&gt;Audit who-read-what" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E88E5;strokeColor=#0D47A1;strokeWidth=2;fontSize=10;align=center;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="570" width="240" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Lakehouse Federation -->
+        <mxCell id="cisa-fed-title" value="&lt;b&gt;LAKEHOUSE FEDERATION&lt;/b&gt;  •  for agencies that won't move data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFD54F;strokeColor=#F57F17;strokeWidth=2;fontSize=11;align=center;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="850" y="680" width="490" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="cisa-fed-detail" value="• Foreign catalog → Snowflake / Redshift / Postgres&lt;br&gt;• UC enforces grants, lineage, audit on remote query&lt;br&gt;• Query pushdown when supported (no data egress)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F57F17;strokeWidth=1;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="850" y="715" width="490" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- 403 Debug callout -->
+        <mxCell id="debug-callout" value="&lt;b&gt;403 DEBUG ORDER:&lt;/b&gt; (1) trust policy, (2) bucket policy, (3) KMS key policy, (4) VPCE endpoint policy, (5) ext loc URL match" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=2;fontSize=10;align=left;spacing=8;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="850" y="810" width="490" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Connect network → CISA -->
+        <mxCell id="ar-net-cisa" style="endArrow=classic;html=1;strokeColor=#1565C0;strokeWidth=4;exitX=1;exitY=0.5;entryX=0;entryY=0.3;" edge="1" parent="1" source="net-vpce-s3" target="cisa-cred-detail">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Branding -->
+        <mxCell id="branding-text" value="Mountain Digital Systems" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#1976D2;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1100" y="20" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="branding-logo" value="MDS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1976D2;strokeColor=#0D47A1;strokeWidth=2;fontSize=12;fontColor=#FFFFFF;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1325" y="20" width="40" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

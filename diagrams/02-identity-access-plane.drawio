@@ -1,0 +1,165 @@
+<mxfile host="app.diagrams.net" modified="2026-05-21T10:00:00.000Z" agent="Claude" version="22.1.0">
+  <diagram name="Identity and Access Plane" id="identity-access">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="&lt;b&gt;IDENTITY &amp; ACCESS PLANE&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontColor=#1a1a1a;" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="700" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="Federated agency IdPs → SCIM → Account → Workspace ACLs · UC grants · Cluster policies → Service Principals" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#616161;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="200" y="50" width="1000" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- LAYER 1: Identity Providers -->
+        <mxCell id="idp-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="1320" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="idp-label" value="&lt;b&gt;IDENTITY PROVIDERS (Agency IdPs)&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="60" y="110" width="500" height="25" as="geometry" />
+        </mxCell>
+
+        <mxCell id="idp-azure" value="&lt;b&gt;Azure AD / Entra ID&lt;/b&gt;&lt;br&gt;&lt;br&gt;Primary federation&lt;br&gt;OIDC + SAML&lt;br&gt;MFA enforced" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="145" width="240" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="idp-okta" value="&lt;b&gt;Okta&lt;/b&gt;&lt;br&gt;&lt;br&gt;Some agencies&lt;br&gt;SAML 2.0&lt;br&gt;PIV / CAC step-up" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="350" y="145" width="240" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="idp-piv" value="&lt;b&gt;PIV / CAC&lt;/b&gt;&lt;br&gt;&lt;br&gt;Smart-card&lt;br&gt;Step-up auth&lt;br&gt;FIPS 201" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="620" y="145" width="240" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="idp-emergency" value="&lt;b&gt;Break-glass&lt;/b&gt;&lt;br&gt;&lt;br&gt;Local accounts&lt;br&gt;Sealed credentials&lt;br&gt;Audit-only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCCBC;strokeColor=#BF360C;strokeWidth=2;fontSize=10;align=center;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="890" y="145" width="200" height="75" as="geometry" />
+        </mxCell>
+
+        <!-- SCIM arrow -->
+        <mxCell id="scim-label" value="SCIM 2.0 / push provisioning" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#1565C0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="500" y="240" width="400" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="scim-arrow" style="endArrow=classic;html=1;strokeColor=#1565C0;strokeWidth=4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="265" as="sourcePoint" />
+            <mxPoint x="700" y="295" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- LAYER 2: Account level -->
+        <mxCell id="acct-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="40" y="290" width="1320" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="acct-label" value="&lt;b&gt;DATABRICKS ACCOUNT (Identity Federation Enabled)&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#1565C0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="300" width="600" height="25" as="geometry" />
+        </mxCell>
+
+        <mxCell id="acct-users" value="&lt;b&gt;USERS&lt;/b&gt;&lt;br&gt;&lt;br&gt;SOC analysts&lt;br&gt;Data engineers&lt;br&gt;Admins&lt;br&gt;Auditors" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="335" width="180" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="acct-groups" value="&lt;b&gt;GROUPS&lt;/b&gt;&lt;br&gt;&lt;br&gt;cisa-soc-l1 / l2 / l3&lt;br&gt;cisa-eng-platform&lt;br&gt;cisa-admin-break-glass&lt;br&gt;agency-X-readers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#90CAF9;strokeColor=#1565C0;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="280" y="335" width="220" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="acct-sps" value="&lt;b&gt;SERVICE PRINCIPALS&lt;/b&gt;&lt;br&gt;&lt;br&gt;sp-ingest-agency-A&lt;br&gt;sp-bundle-deploy-prod&lt;br&gt;sp-app-access-portal&lt;br&gt;sp-system-tables-reader" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#64B5F6;strokeColor=#1565C0;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="520" y="335" width="240" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="acct-roles" value="&lt;b&gt;ACCOUNT ROLES&lt;/b&gt;&lt;br&gt;&lt;br&gt;Account Admin&lt;br&gt;Metastore Admin&lt;br&gt;Workspace Admin&lt;br&gt;Marketplace Admin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#42A5F5;strokeColor=#1565C0;strokeWidth=2;fontSize=10;align=center;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="780" y="335" width="220" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="acct-oauth" value="&lt;b&gt;OAUTH M2M&lt;/b&gt;&lt;br&gt;&lt;br&gt;Federated tokens (OIDC)&lt;br&gt;GitHub Actions trust&lt;br&gt;Short-lived secrets&lt;br&gt;Auto-rotated" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E88E5;strokeColor=#0D47A1;strokeWidth=2;fontSize=10;align=center;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="335" width="280" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows down to enforcement layer -->
+        <mxCell id="enforce-arrow" style="endArrow=classic;html=1;strokeColor=#2E7D32;strokeWidth=4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="475" as="sourcePoint" />
+            <mxPoint x="700" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="enforce-label" value="GRANTS · ACLs · POLICIES" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#2E7D32;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="500" y="480" width="400" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- LAYER 3: Enforcement layers (3 columns) -->
+        <mxCell id="enf-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="40" y="510" width="1320" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="enf-label" value="&lt;b&gt;ENFORCEMENT LAYERS&lt;/b&gt;  •  Defense-in-depth: each layer can deny independently" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#2E7D32;" vertex="1" parent="1">
+          <mxGeometry x="60" y="520" width="800" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- Workspace ACLs -->
+        <mxCell id="enf-ws" value="&lt;b&gt;WORKSPACE&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;strokeWidth=2;fontSize=12;align=center;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="80" y="555" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="enf-ws-detail" value="• IP access lists&lt;br&gt;• Token policies (TTL, scope)&lt;br&gt;• Workspace user assignment&lt;br&gt;• Login frequency&lt;br&gt;• Egress firewall" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;strokeWidth=1;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="80" y="590" width="240" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- UC Grants -->
+        <mxCell id="enf-uc" value="&lt;b&gt;UNITY CATALOG&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;strokeWidth=2;fontSize=12;align=center;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="350" y="555" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="enf-uc-detail" value="• GRANT/REVOKE catalog→table&lt;br&gt;• Row filters (function-based)&lt;br&gt;• Column masks&lt;br&gt;• Tag-based ABAC&lt;br&gt;• External location ACLs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;strokeWidth=1;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="350" y="590" width="240" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Cluster policies -->
+        <mxCell id="enf-compute" value="&lt;b&gt;COMPUTE&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;strokeWidth=2;fontSize=12;align=center;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="620" y="555" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="enf-compute-detail" value="• Cluster policies (whitelisted)&lt;br&gt;• Init scripts allow-list&lt;br&gt;• Instance profile pinning&lt;br&gt;• Single-user vs shared isolation&lt;br&gt;• Photon-only enforcement" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;strokeWidth=1;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="620" y="590" width="240" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Secrets & Apps -->
+        <mxCell id="enf-secrets" value="&lt;b&gt;SECRETS / APPS&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;strokeWidth=2;fontSize=12;align=center;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="890" y="555" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="enf-secrets-detail" value="• Databricks-backed scopes&lt;br&gt;• AWS SM / Azure KV&lt;br&gt;• ACLs per scope&lt;br&gt;• App on-behalf-of user&lt;br&gt;• OAuth user-to-machine" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;strokeWidth=1;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="890" y="590" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Audit / detective -->
+        <mxCell id="enf-audit" value="&lt;b&gt;AUDIT / DETECTIVE&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFD54F;strokeColor=#F57F17;strokeWidth=2;fontSize=12;align=center;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1120" y="555" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="enf-audit-detail" value="• system.access.audit&lt;br&gt;• information_schema.privileges&lt;br&gt;• Query history&lt;br&gt;• Cluster events&lt;br&gt;• Drift detector → SOC alert" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F57F17;strokeWidth=1;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="590" width="220" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- LAYER 4: Service Principal usage callout -->
+        <mxCell id="sp-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#6A1B9A;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="40" y="755" width="1320" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="sp-label" value="&lt;b&gt;SERVICE PRINCIPAL USAGE PATTERNS&lt;/b&gt;  •  Humans never read raw catalogs — only SPs running governed jobs do" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#6A1B9A;" vertex="1" parent="1">
+          <mxGeometry x="60" y="765" width="900" height="25" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sp-ingest" value="&lt;b&gt;sp-ingest-*&lt;/b&gt;&lt;br&gt;Reads agency S3 → writes Bronze&lt;br&gt;Cluster policy: ingest-only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#6A1B9A;strokeWidth=2;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="80" y="800" width="300" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="sp-bundle" value="&lt;b&gt;sp-bundle-deploy-*&lt;/b&gt;&lt;br&gt;CI/CD via OAuth M2M&lt;br&gt;CAN_MANAGE on bundle resources" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#6A1B9A;strokeWidth=2;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="400" y="800" width="300" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="sp-app" value="&lt;b&gt;sp-app-*&lt;/b&gt;&lt;br&gt;Apps backend identity&lt;br&gt;Propagates end-user via OBO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#6A1B9A;strokeWidth=2;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="720" y="800" width="300" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="sp-audit" value="&lt;b&gt;sp-audit-reader&lt;/b&gt;&lt;br&gt;Read-only on system.* schema&lt;br&gt;Feeds SIEM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#6A1B9A;strokeWidth=2;fontSize=10;align=left;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="800" width="280" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Branding -->
+        <mxCell id="branding-text" value="Mountain Digital Systems" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#1976D2;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1100" y="20" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="branding-logo" value="MDS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1976D2;strokeColor=#0D47A1;strokeWidth=2;fontSize=12;fontColor=#FFFFFF;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1325" y="20" width="40" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

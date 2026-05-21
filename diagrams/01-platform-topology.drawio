@@ -1,0 +1,236 @@
+<mxfile host="app.diagrams.net" modified="2026-05-21T10:00:00.000Z" agent="Claude" version="22.1.0">
+  <diagram name="Platform Topology" id="platform-topology">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="&lt;b&gt;CISA DATABRICKS PLATFORM TOPOLOGY&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontColor=#1a1a1a;" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="700" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="TB/hour log ingest from federal agencies → Unity Catalog governance → SOC consumers" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#616161;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="350" y="50" width="700" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- LAYER 1: Federal Agencies -->
+        <mxCell id="agency-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=3;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="90" width="1320" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-label" value="&lt;b&gt;FEDERAL AGENCY DATA SOURCES&lt;/b&gt;  •  Cross-Account S3  •  TB/hour" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="60" y="100" width="600" height="25" as="geometry" />
+        </mxCell>
+
+        <mxCell id="agency-a" value="&lt;b&gt;Agency A&lt;/b&gt;&lt;br&gt;&lt;br&gt;Network logs&lt;br&gt;&lt;i&gt;NetFlow / PCAP&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="135" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-b" value="&lt;b&gt;Agency B&lt;/b&gt;&lt;br&gt;&lt;br&gt;Endpoint EDR&lt;br&gt;&lt;i&gt;JSON streams&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="260" y="135" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-c" value="&lt;b&gt;Agency C&lt;/b&gt;&lt;br&gt;&lt;br&gt;DNS / Proxy&lt;br&gt;&lt;i&gt;CEF / Syslog&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="440" y="135" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-d" value="&lt;b&gt;Agency D&lt;/b&gt;&lt;br&gt;&lt;br&gt;Cloud trails&lt;br&gt;&lt;i&gt;CloudTrail / Audit&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="620" y="135" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-e" value="&lt;b&gt;Agency E&lt;/b&gt;&lt;br&gt;&lt;br&gt;Vuln scans&lt;br&gt;&lt;i&gt;Tenable / Nessus&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="800" y="135" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-n" value="&lt;b&gt;Agency N&lt;/b&gt;&lt;br&gt;&lt;br&gt;...20+ more&lt;br&gt;&lt;i&gt;Mixed sensors&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="980" y="135" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="agency-bucket" value="&lt;b&gt;S3&lt;/b&gt;&lt;br&gt;&lt;br&gt;Agency-owned" style="shape=mxgraph.aws4.bucket;dashed=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fillColor=#E8E8E8;strokeColor=#232F3E;align=center;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="135" width="100" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows down -->
+        <mxCell id="arrow-a" style="endArrow=classic;html=1;strokeColor=#E65100;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="225" as="sourcePoint" />
+            <mxPoint x="160" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow-b" style="endArrow=classic;html=1;strokeColor=#E65100;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="225" as="sourcePoint" />
+            <mxPoint x="340" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow-c" style="endArrow=classic;html=1;strokeColor=#E65100;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="225" as="sourcePoint" />
+            <mxPoint x="520" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow-d" style="endArrow=classic;html=1;strokeColor=#E65100;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="225" as="sourcePoint" />
+            <mxPoint x="700" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow-e" style="endArrow=classic;html=1;strokeColor=#E65100;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="880" y="225" as="sourcePoint" />
+            <mxPoint x="880" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow-n" style="endArrow=classic;html=1;strokeColor=#E65100;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1060" y="225" as="sourcePoint" />
+            <mxPoint x="1060" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- LAYER 2: CISA AWS Account -->
+        <mxCell id="aws-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=3;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="270" width="1320" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="aws-label" value="&lt;b&gt;CISA AWS ACCOUNT (FedRAMP High)&lt;/b&gt;  •  Single trust boundary  •  PrivateLink-only" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#1565C0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="280" width="700" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- Network ingress -->
+        <mxCell id="net-box" value="&lt;b&gt;NETWORK INGRESS&lt;/b&gt;&lt;br&gt;&lt;br&gt;Front-end PrivateLink&lt;br&gt;Back-end PrivateLink&lt;br&gt;VPC + IP ACLs&lt;br&gt;Egress firewall" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=11;align=center;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="80" y="320" width="200" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="storage-box" value="&lt;b&gt;STORAGE LAYER&lt;/b&gt;&lt;br&gt;&lt;br&gt;Storage Credentials&lt;br&gt;External Locations&lt;br&gt;Cross-account IAM trust&lt;br&gt;KMS-encrypted" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=11;align=center;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="300" y="320" width="200" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- Workspace block (medallion) -->
+        <mxCell id="ws-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1565C0;strokeWidth=2;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="320" width="800" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="ws-label" value="&lt;b&gt;DATABRICKS WORKSPACE(S)&lt;/b&gt;  •  Lakeflow + Auto Loader" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#1565C0;" vertex="1" parent="1">
+          <mxGeometry x="555" y="328" width="500" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Auto Loader -->
+        <mxCell id="al" value="&lt;b&gt;Auto Loader&lt;/b&gt;&lt;br&gt;&lt;br&gt;Schema evolution&lt;br&gt;cloudFiles" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="560" y="360" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Bronze -->
+        <mxCell id="bronze" value="&lt;b&gt;BRONZE&lt;/b&gt;&lt;br&gt;&lt;br&gt;Raw / Append-only&lt;br&gt;Schema-on-read" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="720" y="360" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Silver -->
+        <mxCell id="silver" value="&lt;b&gt;SILVER&lt;/b&gt;&lt;br&gt;&lt;br&gt;Validated&lt;br&gt;Deduped&lt;br&gt;Liquid clustered" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CFD8DC;strokeColor=#455A64;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="880" y="360" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Gold -->
+        <mxCell id="gold" value="&lt;b&gt;GOLD&lt;/b&gt;&lt;br&gt;&lt;br&gt;Threat indicators&lt;br&gt;SOC-ready" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF59D;strokeColor=#F57F17;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="360" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Lakeflow underneath -->
+        <mxCell id="lakeflow" value="&lt;b&gt;Lakeflow Declarative Pipelines&lt;/b&gt;  •  Expectations  •  CDC  •  Auto-compaction" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#6A1B9A;strokeWidth=2;fontSize=11;align=center;" vertex="1" parent="1">
+          <mxGeometry x="560" y="465" width="620" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="photon" value="&lt;b&gt;Photon&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#01579B;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="465" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Pipeline arrows -->
+        <mxCell id="ar-al-bronze" style="endArrow=classic;html=1;strokeColor=#1565C0;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="400" as="sourcePoint" />
+            <mxPoint x="720" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ar-bronze-silver" style="endArrow=classic;html=1;strokeColor=#1565C0;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="860" y="400" as="sourcePoint" />
+            <mxPoint x="880" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ar-silver-gold" style="endArrow=classic;html=1;strokeColor=#1565C0;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1020" y="400" as="sourcePoint" />
+            <mxPoint x="1040" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Ingress chain arrows -->
+        <mxCell id="ar-net-storage" style="endArrow=classic;html=1;strokeColor=#1565C0;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="280" y="385" as="sourcePoint" />
+            <mxPoint x="300" y="385" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ar-storage-ws" style="endArrow=classic;html=1;strokeColor=#1565C0;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="385" as="sourcePoint" />
+            <mxPoint x="560" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- LAYER 3: Unity Catalog -->
+        <mxCell id="uc-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=3;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="580" width="1320" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-label" value="&lt;b&gt;UNITY CATALOG (Account-level)&lt;/b&gt;  •  30–40 catalogs  •  80+ schemas  •  Lineage  •  Audit" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#2E7D32;" vertex="1" parent="1">
+          <mxGeometry x="60" y="590" width="800" height="25" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc-meta" value="&lt;b&gt;Metastore&lt;/b&gt;&lt;br&gt;Region-bound&lt;br&gt;Single per region" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="625" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-cat" value="&lt;b&gt;Catalogs&lt;/b&gt;&lt;br&gt;agency_a · agency_b · ...&lt;br&gt;classified · unclassified · shared" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="280" y="625" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-schema" value="&lt;b&gt;Schemas&lt;/b&gt;&lt;br&gt;bronze · silver · gold per agency&lt;br&gt;raw · curated · indicators" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#81C784;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="540" y="625" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-policy" value="&lt;b&gt;Policies&lt;/b&gt;&lt;br&gt;Row filters · Column masks&lt;br&gt;Tag-based ABAC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#66BB6A;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;align=center;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="800" y="625" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uc-audit" value="&lt;b&gt;system.* tables&lt;/b&gt;&lt;br&gt;access.audit · billing.usage&lt;br&gt;information_schema" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#43A047;strokeColor=#1B5E20;strokeWidth=2;fontSize=10;align=center;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="625" width="240" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows from workspace to UC -->
+        <mxCell id="ar-ws-uc" style="endArrow=classic;html=1;strokeColor=#2E7D32;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="550" as="sourcePoint" />
+            <mxPoint x="700" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- LAYER 4: Consumers -->
+        <mxCell id="cons-section" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#AD1457;strokeWidth=3;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="730" width="1320" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="cons-label" value="&lt;b&gt;CONSUMERS&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#AD1457;" vertex="1" parent="1">
+          <mxGeometry x="60" y="740" width="200" height="25" as="geometry" />
+        </mxCell>
+
+        <mxCell id="soc" value="&lt;b&gt;SOC Dashboards&lt;/b&gt;&lt;br&gt;&lt;br&gt;DBSQL Warehouses&lt;br&gt;Threat triage&lt;br&gt;Real-time alerts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8BBD0;strokeColor=#AD1457;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="80" y="775" width="240" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="analyst" value="&lt;b&gt;Analyst Notebooks&lt;/b&gt;&lt;br&gt;&lt;br&gt;Threat hunting&lt;br&gt;Hypothesis-driven queries" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8BBD0;strokeColor=#AD1457;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="350" y="775" width="240" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="apps" value="&lt;b&gt;Databricks Apps&lt;/b&gt;&lt;br&gt;&lt;br&gt;Self-service access portal&lt;br&gt;Auto-expiring grants" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8BBD0;strokeColor=#AD1457;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="620" y="775" width="240" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="ml" value="&lt;b&gt;Genie / AI-BI&lt;/b&gt;&lt;br&gt;&lt;br&gt;Natural-language search&lt;br&gt;Threat summarization" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8BBD0;strokeColor=#AD1457;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="890" y="775" width="240" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="share" value="&lt;b&gt;Delta Sharing&lt;/b&gt;&lt;br&gt;&lt;br&gt;Cross-agency&lt;br&gt;indicators feed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8BBD0;strokeColor=#AD1457;strokeWidth=2;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="775" width="180" height="75" as="geometry" />
+        </mxCell>
+
+        <!-- Branding -->
+        <mxCell id="branding-text" value="Mountain Digital Systems" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#1976D2;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1100" y="20" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="branding-logo" value="MDS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1976D2;strokeColor=#0D47A1;strokeWidth=2;fontSize=12;fontColor=#FFFFFF;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1325" y="20" width="40" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
