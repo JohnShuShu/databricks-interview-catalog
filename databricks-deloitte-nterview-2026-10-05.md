@@ -1,8 +1,5 @@
-# Databricks interview debrief (Deloitte, federal agency on GovCloud): 2026-10-05
+# Databricks interview debrief
 
-_Source: `Databricks Discussion.ogg` (34 min), transcribed locally with Whisper (`distil-large-v3`). The raw timestamped
-transcript is `databricks-interview-2026-10-05-transcript.txt`; timestamps below (`[mm:ss]`) point into it. Whisper
-mis-hears names: "Gout/Golf Cloud" = GovCloud, "Jeannie" = Genie, "Savient" = Saviynt, "B-Mad" = BMAD, "data breaks" = Databricks._
 
 For each topic below:
 * **Asked:** what the interviewer wanted.
